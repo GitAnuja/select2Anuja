@@ -1,15 +1,15 @@
-$.fn.select2 = function(){
-	createContainer(this);
+$.fn.select2 = function(options){
+	createContainer(this, options);
 }
 
-function createContainer(ele){
+function createContainer(ele, options){
 	var con = document.createElement("span");
 	con.id = "select2-"+ele[0].id+"-container";
 	con.innerText = ele[0].value;
 	con.className = "select2-container";
 	con.onclick = function(){
 		if(!document.getElementById("select2-"+ele[0].id+"-dropdown")){
-			createDropdown(ele);		
+			createDropdown(ele, options);		
 		}
 	}
 	con.style.height = ele.css("height");
@@ -23,7 +23,7 @@ function createContainer(ele){
 	ele.parent().append(con);
 }
 
-function createDropdown(ele){
+function createDropdown(ele, options){
 	var drop = document.createElement("span");
 	drop.id = "select2-"+ele[0].id+"-dropdown";	
 	drop.className = "select2-dropdown";
@@ -32,7 +32,7 @@ function createDropdown(ele){
 	drop.style.left = con.offset().left;
 	drop.style.width = con.width();
 	createInput(drop);
-	createResult(ele, drop);
+	createResult(ele, drop, options);
 	document.body.append(drop);
 }
 
@@ -45,17 +45,40 @@ function createInput(ele){
 	ele.append(search);
 }
 
-function createResult(ele, drop){
+function createResult(ele, drop, options){
 	var res = document.createElement("span");
 	res.className = "select2-result";
 	var ul = document.createElement("ul");
 	res.append(ul);
-	var options = ele[0].options;
+	if(options && options.ajax){
+		$.ajax({
+			url : options.ajax.url,
+			success : function(resp){
+				if(typeof resp[0] != "object"){
+					var ret = [];
+					for(var i=0; i<resp.length; i++){
+						ret[i] = {value : resp[i], text : resp[i]};
+					}
+					createOptions(ret, ul);
+				}
+				else{
+					createOptions(resp, ul);
+				}
+			}
+		})
+	}
+	else{
+		var options = ele[0].options;
+		createOptions(options, ul);
+	}
+	drop.append(res);
+}
+
+function createOptions(options, ul){
 	for(var i=0; i<options.length; i++){
 		var li = document.createElement("li");
 		li.setAttribute("data-value", options[i].value);
 		li.innerText = options[i].text;
 		ul.append(li);
 	}
-	drop.append(res);
 }
