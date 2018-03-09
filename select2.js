@@ -11,6 +11,9 @@ function createContainer(ele, options){
 		if(!document.getElementById("select2-"+ele[0].id+"-dropdown")){
 			createDropdown(ele, options);		
 		}
+		else{
+			document.getElementById("select2-"+ele[0].id+"-dropdown").style.display = "";
+		}
 	}
 	con.style.height = ele.css("height");
 	con.style.width = ele.css("width");
@@ -59,10 +62,10 @@ function createResult(ele, drop, options){
 					for(var i=0; i<resp.length; i++){
 						ret[i] = {value : resp[i], text : resp[i]};
 					}
-					createOptions(ret, ul);
+					createOptions(ret, ul, options);
 				}
 				else{
-					createOptions(resp, ul);
+					createOptions(resp, ul, options);
 				}
 			}
 		})
@@ -74,11 +77,16 @@ function createResult(ele, drop, options){
 	drop.append(res);
 }
 
-function createOptions(options, ul){
+function createOptions(options, ul, op){
 	for(var i=0; i<options.length; i++){
 		var li = document.createElement("li");
 		li.setAttribute("data-value", options[i].value);
 		li.innerText = options[i].text;
+		li.onclick = function(){
+			if(op.closeOnSelect){
+				ul.parentElement.parentElement.style.display = "none";
+			}
+		}
 		ul.append(li);
 	}
 }
