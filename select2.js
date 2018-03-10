@@ -70,6 +70,19 @@ function createResult(ele, drop, options){
 			}
 		})
 	}
+	else if(options && options.data){
+		var resp = options.data;
+		if(typeof resp[0] != "object"){
+			var ret = [];
+			for(var i=0; i<resp.length; i++){
+				ret[i] = {value : resp[i], text : resp[i]};
+			}
+			createOptions(ret, ul, options);
+		}
+		else{
+			createOptions(resp, ul, options);
+		}
+	}
 	else{
 		var options = ele[0].options;
 		createOptions(options, ul);
