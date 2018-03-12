@@ -5,6 +5,7 @@ $(document).ready(function(){
 		//},
 		closeOnSelect : true,
 		//data : ["anuja", "bill", "call"],
-		data : [{value : "anuja", text : "a"}, {value : "bill", text : "b"}]
+		data : [{value : "anuja", text : "a"}, {value : "bill", text : "b"}],
+		disabled : true
 	});
 });

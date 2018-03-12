@@ -8,6 +8,9 @@ function createContainer(ele, options){
 	con.innerText = ele[0].value;
 	con.className = "select2-container";
 	con.onclick = function(){
+		if(options.disabled){
+			return;
+		}
 		if(!document.getElementById("select2-"+ele[0].id+"-dropdown")){
 			createDropdown(ele, options);		
 		}
