@@ -26,6 +26,11 @@ function createContainer(ele, options){
 	ele.parent().append(document.createElement("br"));
 	ele.parent().append(document.createElement("br"));
 	ele.parent().append(document.createElement("br"));
+	if(options.containerCss){
+		for(var style in options.containerCss){
+			con.style[style] = options.containerCss[style];
+		}
+	}
 	ele.parent().append(con);
 }
 
