@@ -31,6 +31,9 @@ function createContainer(ele, options){
 			con.style[style] = options.containerCss[style];
 		}
 	}
+	if(options.containerCssClass){
+		con.className = con.className+" "+options.containerCssClass;		
+	}
 	ele.parent().append(con);
 }
 
