@@ -47,6 +47,11 @@ function createDropdown(ele, options){
 	drop.style.width = con.width();
 	createInput(drop);
 	createResult(ele, drop, options);
+	if(options.dropdownCss){
+		for(var style in options.dropdownCss){
+			drop.style[style] = options.dropdownCss[style];
+		}
+	}
 	document.body.append(drop);
 }
 
