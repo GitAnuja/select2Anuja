@@ -12,7 +12,7 @@ function createContainer(ele, options){
 			return;
 		}
 		if(!document.getElementById("select2-"+ele[0].id+"-dropdown")){
-			createDropdown(ele, options);		
+			createDropdown(ele, options, con);		
 		}
 		else{
 			document.getElementById("select2-"+ele[0].id+"-dropdown").style.display = "";
@@ -37,7 +37,7 @@ function createContainer(ele, options){
 	ele.parent().append(con);
 }
 
-function createDropdown(ele, options){
+function createDropdown(ele, options, con){
 	var drop = document.createElement("span");
 	drop.id = "select2-"+ele[0].id+"-dropdown";	
 	drop.className = "select2-dropdown";
@@ -46,11 +46,14 @@ function createDropdown(ele, options){
 	drop.style.left = con.offset().left;
 	drop.style.width = con.width();
 	createInput(drop);
-	createResult(ele, drop, options);
+	createResult(ele, drop, options, con);
 	if(options.dropdownCss){
 		for(var style in options.dropdownCss){
 			drop.style[style] = options.dropdownCss[style];
 		}
+	}
+	if(options.dropdownCssClass){
+		drop.className = drop.className+" "+options.dropdownCssClass;
 	}
 	document.body.append(drop);
 }
@@ -64,7 +67,7 @@ function createInput(ele){
 	ele.append(search);
 }
 
-function createResult(ele, drop, options){
+function createResult(ele, drop, options, con){
 	var res = document.createElement("span");
 	res.className = "select2-result";
 	var ul = document.createElement("ul");
@@ -78,10 +81,10 @@ function createResult(ele, drop, options){
 					for(var i=0; i<resp.length; i++){
 						ret[i] = {value : resp[i], text : resp[i]};
 					}
-					createOptions(ret, ul, options);
+					createOptions(ret, ul, options, con, ele);
 				}
 				else{
-					createOptions(resp, ul, options);
+					createOptions(resp, ul, options, con, ele);
 				}
 			}
 		})
@@ -93,28 +96,29 @@ function createResult(ele, drop, options){
 			for(var i=0; i<resp.length; i++){
 				ret[i] = {value : resp[i], text : resp[i]};
 			}
-			createOptions(ret, ul, options);
+			createOptions(ret, ul, options, con, ele);
 		}
 		else{
-			createOptions(resp, ul, options);
+			createOptions(resp, ul, options, con, ele);
 		}
 	}
 	else{
 		var options = ele[0].options;
-		createOptions(options, ul);
+		createOptions(options, ul, undefined, con, ele);
 	}
 	drop.append(res);
 }
 
-function createOptions(options, ul, op){
+function createOptions(options, ul, op, con, parent){
 	for(var i=0; i<options.length; i++){
 		var li = document.createElement("li");
 		li.setAttribute("data-value", options[i].value);
 		li.innerText = options[i].text;
 		li.onclick = function(){
-			if(op.closeOnSelect){
+			if(op.closeOnSelect || parent[0].dataset.closeOnSelect == "true"){
 				ul.parentElement.parentElement.style.display = "none";
 			}
+			con[0].innerText = this.innerText;
 		}
 		ul.append(li);
 	}
