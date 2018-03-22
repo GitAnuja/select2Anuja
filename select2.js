@@ -89,8 +89,14 @@ function createResult(ele, drop, options, con){
 			}
 		})
 	}
-	else if(options && options.data){
-		var resp = options.data;
+	else if((options && options.data) || ele[0].dataset.data){
+		var resp;
+		if(ele[0].dataset.data){
+			resp = JSON.parse(ele[0].dataset.data);
+		}
+		if(options && options.data){
+			resp = options.data;			
+		}
 		if(typeof resp[0] != "object"){
 			var ret = [];
 			for(var i=0; i<resp.length; i++){
@@ -117,6 +123,9 @@ function createOptions(options, ul, op, con, parent){
 		li.onclick = function(){
 			if(op.closeOnSelect || parent[0].dataset.closeOnSelect == "true"){
 				ul.parentElement.parentElement.style.display = "none";
+			}
+			if(op.closeOnSelect == false){
+				ul.parentElement.parentElement.style.display = "";
 			}
 			con[0].innerText = this.innerText;
 		}
