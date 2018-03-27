@@ -26,10 +26,15 @@ function createContainer(ele, options){
 	ele.parent().append(document.createElement("br"));
 	ele.parent().append(document.createElement("br"));
 	ele.parent().append(document.createElement("br"));
+	var styles = {};
+	if(ele[0].dataset.containerCss){
+		styles = JSON.parse(ele[0].dataset.containerCss);
+	}
 	if(options.containerCss){
-		for(var style in options.containerCss){
-			con.style[style] = options.containerCss[style];
-		}
+		styles = options.containerCssClass;
+	}
+	for(var style in styles){
+		con.style[style] = styles[style];
 	}
 	if(options.containerCssClass){
 		con.className = con.className+" "+options.containerCssClass;		

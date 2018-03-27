@@ -7,7 +7,7 @@ $(document).ready(function(){
 		//data : ["anuja", "bill", "call"],
 		//data : [{value : "anuja", text : "a"}, {value : "bill", text : "b"}],
 		//disabled : true,
-		containerCss : {"background-color" : "blue"},
+		//containerCss : {"background-color" : "blue"},
 		containerCssClass : "test",
 		dropdownCss : {"background-color" : "red"},
 		dropdownCssClass : "test"
