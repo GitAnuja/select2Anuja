@@ -31,13 +31,16 @@ function createContainer(ele, options){
 		styles = JSON.parse(ele[0].dataset.containerCss);
 	}
 	if(options.containerCss){
-		styles = options.containerCssClass;
+		styles = options.containerCss;
 	}
 	for(var style in styles){
 		con.style[style] = styles[style];
 	}
 	if(options.containerCssClass){
 		con.className = con.className+" "+options.containerCssClass;		
+	}
+	if(ele[0].dataset.containerCssClass){
+		con.className = con.className+" "+ele[0].dataset.containerCssClass;		
 	}
 	ele.parent().append(con);
 }
