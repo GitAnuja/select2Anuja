@@ -55,10 +55,15 @@ function createDropdown(ele, options, con){
 	drop.style.width = con.width();
 	createInput(drop);
 	createResult(ele, drop, options, con);
+	var styles = {};
+	if(ele[0].dataset.dropdownCss){
+		styles = JSON.parse(ele[0].dataset.dropdownCss);
+	}
 	if(options.dropdownCss){
-		for(var style in options.dropdownCss){
-			drop.style[style] = options.dropdownCss[style];
-		}
+		styles = options.dropdownCss;
+	}
+	for(var style in styles){
+		drop.style[style] = styles[style];
 	}
 	if(options.dropdownCssClass){
 		drop.className = drop.className+" "+options.dropdownCssClass;
