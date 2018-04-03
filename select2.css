@@ -1,56 +1,13 @@
 .select2-container{
 	box-sizing : border-box;
-	display : inline-block;
-	margin : 0;
-	position : relative;
-	vertical-align : middle;
-	background-color : #fff;
+	display : block;
 	border : 1px solid #aaa;
 	border-radius : 4px;
 	cursor : pointer;
 	padding-left : 8px;
-	padding-right : 20px;
+	padding-right : 8px;
 	overflow : hidden;
 	text-overflow : ellipsis;
 	white-space : nowrap;
-}
-
-.select2-arrow{
-	border : solid black;
-	border-width : 0 1px 1px 0;
-	display : inline-block;
-	padding : 3px;
-	transform : rotate(45deg);
-	-webkit-transform: rotate(45deg);
 	position : absolute;
-	top : 1px;
-	right : 1px;
-}
-
-.select2-dropdown{
-	position : absolute;
-	background-color : white;
-	border : 1px solid #aaa;
-	position : absolute;
-	box-sizing : border-box;
-	display : block;
-}
-
-.select2-search{
-	display : block;
-	padding : 4px;
-}
-
-.select2-input{
-	border : 1px solid #aaa;
-	width : 100%;
-}
-
-.select2-result{
-	max-height : 200px;
-	overflow-y : auto;
-}
-
-.select2-result ul{
-	list-style : none;
 }

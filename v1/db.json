@@ -1,0 +1,21 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "options" : ["A1", "b2", "c3"],
+   "options1" : [{"value" : "A1", "text" : "sdn"}, {"value" : "sdkjf", "text" : "dskf"}]
+}
