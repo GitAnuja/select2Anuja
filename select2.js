@@ -21,5 +21,6 @@ var select2 = {
 		span.innerText = select.value;
 		span.style.left = select.offsetLeft;
 		span.style.top = select.offsetTop;
+		select.style.display = "none";
 	}
 }
